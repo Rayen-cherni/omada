@@ -1,10 +1,10 @@
 
-const CONTROLLER_IP = '';
-const PORT = '';
-const CONTROLLER_ID = '';
+const CONTROLLER_IP = '192.168.1.101';
+const PORT = '8043';
+const CONTROLLER_ID = '4ef9eaccd0d8ba3af386e228d81684f0';
 // Example usage
-const OPERATOR_USERNAME = 'OPERATOR_USERNAME';
-const OPERATOR_PASSWORD = 'OPERATOR_PASSWORD';
+const OPERATOR_USERNAME = 'Relead';
+const OPERATOR_PASSWORD = 'releadpassword';
 
 
 function submitAuth() {
