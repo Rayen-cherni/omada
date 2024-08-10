@@ -45,7 +45,7 @@ document.getElementById('radioId').textContent = params.radioId;
 // Define the login function
 async function loginOperator(username, password) {
     // Define the URL to which the POST request will be sent
-    const url = 'http://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/login';  // Replace with the actual login URL
+    const url = 'https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/login';  // Replace with the actual login URL
 
     // Define the data to be sent in the POST request
     const loginData = {
@@ -81,7 +81,7 @@ async function loginOperator(username, password) {
 
 async function loginGuest(clientMac, apMac, ssidName, radioId, site, time) {
     // Define the URL to which the POST request will be sent
-    const url = 'http://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/extPortal/auth';  // Replace with the actual login URL
+    const url = 'https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/extPortal/auth';  // Replace with the actual login URL
 
     // Define the data to be sent in the POST request
     const loginData = {
