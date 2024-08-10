@@ -8,6 +8,7 @@ const OPERATOR_PASSWORD = 'releadpassword';
 
 
 function submitAuth() {
+    event.preventDefault();
     alert(params.clientMac);
     loginOperator(OPERATOR_USERNAME, OPERATOR_PASSWORD)
     //loginGuest(params.clientMac, params.apMac, params.ssidName, params.radioId, params.site, params.time)
@@ -45,24 +46,26 @@ document.getElementById('radioId').textContent = params.radioId;
 // Define the login function
 async function loginOperator(username, password) {
     // Define the URL to which the POST request will be sent
-    const url = 'https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/login';  // Replace with the actual login URL
-
+    const url = `https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/login`;  // Replace with the actual login URL
     // Define the data to be sent in the POST request
+    
     const loginData = {
         name: username,
         password: password
     };
-
+    alert(loginData)
     try {
         // Send the POST request using fetch
         const response = await fetch(url, {
             method: 'POST',
+            mode:'no-cors',
             headers: {
                 'Content-Type': 'application/json',  // Specify the request content type
+                'Accept': 'application/json'
             },
             body: JSON.stringify(loginData)  // Convert the data to JSON format
         });
-
+        alert(response.status)
         // Check if the response is successful (status code 200-299)
         if (response.ok) {
             // Parse the JSON response
@@ -70,7 +73,7 @@ async function loginOperator(username, password) {
             alert('Login successful:', data);
             // Handle the successful login response here (e.g., redirect, store token)
         } else {
-            alert('Login failed:', response.statusText);
+            alert('Login failed:', response.status);
             // Handle the error response here
         }
     } catch (error) {
@@ -81,7 +84,7 @@ async function loginOperator(username, password) {
 
 async function loginGuest(clientMac, apMac, ssidName, radioId, site, time) {
     // Define the URL to which the POST request will be sent
-    const url = 'https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/extPortal/auth';  // Replace with the actual login URL
+    const url = `https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/extPortal/auth`;  // Replace with the actual login URL
 
     // Define the data to be sent in the POST request
     const loginData = {
@@ -91,7 +94,7 @@ async function loginGuest(clientMac, apMac, ssidName, radioId, site, time) {
         radioId: radioId,
         site: site,
         time: time,
-        authType: '4'
+        authType: '1'
     };
 
     try {
