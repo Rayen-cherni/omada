@@ -1,7 +1,7 @@
 
-const CONTROLLER_IP = '192.168.1.101';
+const CONTROLLER_IP = '197.13.10.162';
 const PORT = '8043';
-const CONTROLLER_ID = '4ef9eaccd0d8ba3af386e228d81684f0';
+const CONTROLLER_ID = '35d07bdb43a76fb05c263e52f09c9aae';
 // Example usage
 const OPERATOR_USERNAME = 'Relead';
 const OPERATOR_PASSWORD = 'releadpassword';
@@ -44,42 +44,26 @@ document.getElementById('ssidName').textContent = params.ssidName;
 document.getElementById('radioId').textContent = params.radioId;
 
 // Define the login function
-async function loginOperator(username, password) {
+function loginOperator(username, password) {
     // Define the URL to which the POST request will be sent
     const url = `https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/login`;  // Replace with the actual login URL
     // Define the data to be sent in the POST request
-    
     const loginData = {
         name: username,
         password: password
     };
     alert(loginData)
-    try {
-        // Send the POST request using fetch
-        const response = await fetch(url, {
-            method: 'POST',
-            mode:'no-cors',
-            headers: {
-                'Content-Type': 'application/json',  // Specify the request content type
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(loginData)  // Convert the data to JSON format
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+    })
+        .then((responseData) => {
+            alert("Response: " + responseData.json());
+        })
+        .catch((error) => {
+            alert("Error: " + error);
         });
-        alert(response.status)
-        // Check if the response is successful (status code 200-299)
-        if (response.ok) {
-            // Parse the JSON response
-            const data = await response.json();
-            alert('Login successful:', data);
-            // Handle the successful login response here (e.g., redirect, store token)
-        } else {
-            alert('Login failed:', response.status);
-            // Handle the error response here
-        }
-    } catch (error) {
-        alert('Error:', error);
-        // Handle network errors here
-    }
 }
 
 async function loginGuest(clientMac, apMac, ssidName, radioId, site, time) {
