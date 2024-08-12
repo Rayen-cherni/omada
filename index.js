@@ -56,6 +56,7 @@ function loginOperator(username, password) {
     fetch(url, {
         method: "POST",
         body: JSON.stringify(loginData),
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
     })
         .then((responseData) => {
