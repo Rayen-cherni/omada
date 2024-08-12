@@ -60,7 +60,8 @@ function loginOperator(username, password) {
         headers: { "Content-Type": "application/json" },
     })
         .then((responseData) => {
-            alert("Response: " + responseData.json());
+            console.log(responseData.json())
+            alert("Response: " + responseData.statusText);
         })
         .catch((error) => {
             alert("Error: " + error);
