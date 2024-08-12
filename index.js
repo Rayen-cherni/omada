@@ -56,6 +56,7 @@ function loginOperator(username, password) {
 
     const requestOptions = {
         method: "POST",
+        mode:'no-cors',
         headers: myHeaders,
         body: raw,
         redirect: "follow"
