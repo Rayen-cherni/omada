@@ -55,7 +55,7 @@ function loginOperator(username, password) {
     alert(loginData)
     fetch(url, {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify(loginData),
         headers: { "Content-Type": "application/json" },
     })
         .then((responseData) => {
