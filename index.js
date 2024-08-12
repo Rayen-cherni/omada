@@ -44,28 +44,41 @@ document.getElementById('ssidName').textContent = params.ssidName;
 document.getElementById('radioId').textContent = params.radioId;
 
 // Define the login function
-function loginOperator(username, password) {
+async function loginOperator(username, password) {
     // Define the URL to which the POST request will be sent
     const url = `https://${CONTROLLER_IP}:${PORT}/${CONTROLLER_ID}/api/v2/hotspot/login`;  // Replace with the actual login URL
+
     // Define the data to be sent in the POST request
     const loginData = {
         name: username,
         password: password
     };
-    alert(loginData)
-    fetch(url, {
-        method: "POST",
-        body: JSON.stringify(loginData),
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-    })
-        .then((responseData) => {
-            console.log(responseData.json())
-            alert("Response: " + responseData.statusText);
-        })
-        .catch((error) => {
-            alert("Error: " + error);
+
+    try {
+        // Send the POST request using fetch
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',  // Specify the request content type
+            },
+            body: JSON.stringify(loginData)  // Convert the data to JSON format
         });
+
+        // Check if the response is successful (status code 200-299)
+        if (response.ok) {
+            // Parse the JSON response
+            const data = await response.json();
+            alert('Login successful:', data);
+            // Handle the successful login response here (e.g., redirect, store token)
+        } else {
+            alert('Login failed:', response.statusText);
+            // Handle the error response here
+        }
+    } catch (error) {
+        alert('Error:', error);
+        // Handle network errors here
+    }
 }
 
 async function loginGuest(clientMac, apMac, ssidName, radioId, site, time) {
