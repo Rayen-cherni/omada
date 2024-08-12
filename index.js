@@ -59,6 +59,10 @@ async function loginOperator(username, password) {
         const response = await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',  // Ensure the Content-Type is set to application/json
+                'Accept': 'application/json'  // This is optional but recommended if the server returns JSON
+            },
             body: JSON.stringify(loginData)  // Convert the data to JSON format
         });
 
