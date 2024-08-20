@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const CONTROLLER_IP = '197.13.10.162';
 const PORT = '8043';
