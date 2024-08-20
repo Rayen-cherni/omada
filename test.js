@@ -1,3 +1,5 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const CONTROLLER_IP = '197.13.10.162';
 const PORT = '8043';
 const CONTROLLER_ID = '35d07bdb43a76fb05c263e52f09c9aae';
@@ -22,11 +24,11 @@ async function loginOperator(username, password) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',  // Ensure the Content-Type is set to application/json
-                'Accept': 'application/json'  // This is optional but recommended if the server returns JSON
+                'Cookie': 'TPEAP_SESSIONID=4e15a4d5e809486c91677987b03c886c'
             },
+            redirect:"follow",
             body: JSON.stringify(loginData)  // Convert the data to JSON format
         });
-        console.log(response)
         // Check if the response is successful (status code 200-299)
         if (response.ok) {
             // Parse the JSON response
